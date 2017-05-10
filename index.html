@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>		<!-- 這是註解 -->
+<html>				<!-- 這是html開頭的tag -->
+<head>				<!-- 這是head開頭的tag -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	<!-- 宣告編碼 -->
+<title>這是要教給大家的Javascript程式</title>							<!-- 放在視窗列的文字 -->
+
+    <!-- CSS Base -->
+     <link rel="stylesheet" type='text/css' media='all' href="css/base.css"> 
+    <!-- CSS Colors -->
+     <link rel="stylesheet" type='text/css' media='all' href="css/colors.css"> 
+    <!-- Optional - CSS SVG Icons (Font Awesome) -->
+     <link rel="stylesheet" type='text/css' media='all' href="css/svg-icons.css"> 
+
+
+</head>				<!-- 這是head結束的tag -->
+<body>
+    <main role="main">
+        <article id="webslides" class="vertical">
+<section class="aligncenter">
+<!-- 下面是選項的語法 -->
+<input type="radio" name="option" value="1">選項1<br>
+<input type="radio" name="option" value="2">選項2<br>
+<input type="radio" name="option" value="3">選項3<br>
+<select name="test" class="opts" id="myselect">
+  <option selected value="DEFAULT">Default</option>
+  <option value="SEL1">Selection 1</option>
+  <option value="SEL2">Selection 2</option>
+</select>
+
+<!-- 下面是按鈕的語法 -->
+<button onclick="window.alert('Hello world!')">Try window alert</button>
+<button onclick="console.log('Hello world console!')">Try console log</button>
+<input id="quote_input">
+<input type="button" id="mybutton" value="這是按鈕" onclick=showopt()>	<!-- 按了之後要執行showopt() -->
+
+<p id="showoption"></p>		<!-- 一個空白的段落 -->
+</section>
+
+<section class="bg-black aligncenter">
+	<span class="background-right-bottom" style="background-image:url('images/ycshu.png'); z-index:5;"></span>
+	<span class="background light" style="background-image:url('images/road-dawn-mountains-sky.jpeg');"></span>
+	<div class="wrap  fadeInUp">
+		<div class="content-left">
+			<blockquote>
+				<h3 id="quote_line1">"數學建模教育之道無它<br>唯數學與榜樣"</h3>
+				<p><cite>舒大ㄅ土</cite></p>
+				
+			</blockquote>
+			<blockquote>
+				<h3>"Mathematical Modeling is nothing<br>but Mathematics and Model!"</h3>
+				<p><cite>me</cite></p>				
+			</blockquote>
+		</div>
+	</div>
+</section>
+        </article>
+        <!-- end article -->
+    </main>
+
+<!-- 以下就真的是Javascript的程式了 -->
+<script src="js/webslides.js"></script>
+<script src="js/jquery.min.js"></script>
+<script>
+const ws = new WebSlides();
+var press_time = 0;
+setoption('abc', 5);
+
+function setoption(option_name, max_option_number) {
+	var i;
+	for(i=1; i<=max_option_number; i++) {
+		document.write("<input type='radio' name='" + option_name + "' value='" + i + "'>選項" + i + "<br>");
+	}
+}
+function showopt(){
+	var x;
+	press_time += 1;
+	x = document.getElementById("mybutton").value = "你按過 " + press_time + " 次了";
+	x = document.getElementsByName("abc");
+	for (var i=0; i<x.length; i++) {
+		if(x[i].checked)
+		{
+			document.getElementById("showoption").innerHTML = x[i].value;
+		}
+	}
+	x = document.getElementById("myselect").value;
+	document.getElementById("showoption").innerHTML += x;
+	x = document.getElementById("quote_input").value;
+	document.getElementById("quote_line1").innerHTML = x;
+}
+</script>
+</body>
+</html>
