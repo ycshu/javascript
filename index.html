@@ -18,22 +18,23 @@
         <article id="webslides" class="vertical">
 <section class="aligncenter">
 <!-- 下面是選項的語法 -->
-<input type="radio" name="option" value="1">選項1<br>
-<input type="radio" name="option" value="2">選項2<br>
-<input type="radio" name="option" value="3">選項3<br>
-<select name="test" class="opts" id="myselect">
-  <option selected value="DEFAULT">Default</option>
-  <option value="SEL1">Selection 1</option>
-  <option value="SEL2">Selection 2</option>
-</select>
-
-<!-- 下面是按鈕的語法 -->
-<button onclick="window.alert('Hello world!')">Try window alert</button>
-<button onclick="console.log('Hello world console!')">Try console log</button>
-<input id="quote_input">
-<input type="button" id="mybutton" value="這是按鈕" onclick=showopt()>	<!-- 按了之後要執行showopt() -->
-
-<p id="showoption"></p>		<!-- 一個空白的段落 -->
+<div class="wrap  fadeInUp">
+<div class="content-left">
+	<input type="radio" name="option" value="1">跑步<br>
+	<input type="radio" name="option" value="2">日出<br>
+	<input type="radio" name="option" value="3">山巔<br>
+	<select name="test" class="opts" id="myselect">
+	  <option selected value="DEFAULT">舒宇宸</option>
+	  <option value="SEL1">劉之中</option>
+	  <option value="SEL2">李昱勳</option>
+	</select>
+	名言一:<input id="quote_input1"> <br>
+	名言二:<input id="quote_input2"> <br>
+	名言三:<input id="quote_input3"> <br>
+	名言四:<input id="quote_input4"> <br>
+	<button type="button" id="mybutton" onclick=showopt()>產生名言</button>	<!-- 按了之後要執行showopt() -->
+</div>
+</div>
 </section>
 
 <section class="bg-black aligncenter">
@@ -61,32 +62,8 @@
 <script src="js/webslides.js"></script>
 <script src="js/jquery.min.js"></script>
 <script>
-const ws = new WebSlides();
-var press_time = 0;
-setoption('abc', 5);
-
-function setoption(option_name, max_option_number) {
-	var i;
-	for(i=1; i<=max_option_number; i++) {
-		document.write("<input type='radio' name='" + option_name + "' value='" + i + "'>選項" + i + "<br>");
-	}
-}
-function showopt(){
-	var x;
-	press_time += 1;
-	x = document.getElementById("mybutton").value = "你按過 " + press_time + " 次了";
-	x = document.getElementsByName("abc");
-	for (var i=0; i<x.length; i++) {
-		if(x[i].checked)
-		{
-			document.getElementById("showoption").innerHTML = x[i].value;
-		}
-	}
-	x = document.getElementById("myselect").value;
-	document.getElementById("showoption").innerHTML += x;
-	x = document.getElementById("quote_input").value;
-	document.getElementById("quote_line1").innerHTML = x;
-}
+	const ws = new WebSlides();
+	//還沒寫好 XD
 </script>
 </body>
 </html>
