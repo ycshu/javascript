@@ -19,37 +19,36 @@
 <section class="aligncenter">
 <!-- 下面是選項的語法 -->
 <div class="wrap  fadeInUp">
-<div class="content-left">
-	<input type="radio" name="option" value="1">跑步<br>
-	<input type="radio" name="option" value="2">日出<br>
-	<input type="radio" name="option" value="3">山巔<br>
-	<select name="test" class="opts" id="myselect">
-	  <option selected value="DEFAULT">舒宇宸</option>
-	  <option value="SEL1">劉之中</option>
-	  <option value="SEL2">李昱勳</option>
-	</select>
-	名言一:<input id="quote_input1"> <br>
-	名言二:<input id="quote_input2"> <br>
-	名言三:<input id="quote_input3"> <br>
-	名言四:<input id="quote_input4"> <br>
-	<button type="button" id="mybutton" onclick=showopt()>產生名言</button>	<!-- 按了之後要執行showopt() -->
-</div>
+	<div class="content-left">
+		<input type="radio" name="option" value="1">跑步<br>
+		<input type="radio" name="option" value="2">鐵軌<br>
+		<input type="radio" name="option" value="3">山巔<br>
+		<select name="test" class="opts" id="myselect">
+		  <option selected value="DEFAULT">舒宇宸</option>
+		  <option value="SEL1">劉之中</option>
+		  <option value="SEL2">李昱勳</option>
+		</select>
+		名言一:<input id="quote_input1" value="數學建模教育之道無它, 唯數學與榜樣"> <br>
+		名言二:<input id="quote_input2" value="Mathematical Modeling is nothing, but Mathematics and Model!"> <br>
+		名言三:<input id="quote_input3" value="舒大ㄅ土, me"> <br>
+		<button type="button" id="mybutton" onclick=showopt()>產生名言</button>	<!-- 按了之後要執行showopt() -->
+	</div>
 </div>
 </section>
 
 <section class="bg-black aligncenter">
-	<span class="background-right-bottom" style="background-image:url('images/ycshu.png'); z-index:5;"></span>
-	<span class="background light" style="background-image:url('images/road-dawn-mountains-sky.jpeg');"></span>
+	<span id="teacher" class="background-right-bottom" style="background-image:url('images/ycshu.png'); z-index:5;"></span>
+	<span id="bgimage" class="background light" style="background-image:url('images/road-dawn-mountains-sky.jpeg');"></span>
 	<div class="wrap  fadeInUp">
 		<div class="content-left">
 			<blockquote>
 				<h3 id="quote_line1">"數學建模教育之道無它<br>唯數學與榜樣"</h3>
-				<p><cite>舒大ㄅ土</cite></p>
+				<p id="author1"><cite>舒大ㄅ土</cite></p>
 				
 			</blockquote>
 			<blockquote>
-				<h3>"Mathematical Modeling is nothing<br>but Mathematics and Model!"</h3>
-				<p><cite>me</cite></p>				
+				<h3 id="quote_line2">"Mathematical Modeling is nothing<br>but Mathematics and Model!"</h3>
+				<p id="author2"><cite>me</cite></p>				
 			</blockquote>
 		</div>
 	</div>
@@ -63,7 +62,18 @@
 <script src="js/jquery.min.js"></script>
 <script>
 	const ws = new WebSlides();
-	//還沒寫好 XD
+	//
+function showopt() {
+	
+	var x;
+	document.getElementById("teacher").style = "background-image:url('images/ccliu.png'); z-index:5;"
+	document.getElementById("bgimage").style = "background-image:url('images/road-2.jpg');"
+	x = document.getElementById("quote_input1").value;
+	x = x.split(',');
+	x = x.join('<br>');
+	document.getElementById("quote_line1").innerHTML = x;
+	
+}
 </script>
 </body>
 </html>
