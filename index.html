@@ -20,13 +20,13 @@
 <!-- 下面是選項的語法 -->
 <div class="wrap  fadeInUp">
 	<div class="content-left">
-		<input type="radio" name="option" value="1">跑步<br>
-		<input type="radio" name="option" value="2">鐵軌<br>
-		<input type="radio" name="option" value="3">山巔<br>
+		<input type="radio" name="option" value="跑步" checked>跑步<br>
+		<input type="radio" name="option" value="鐵軌">鐵軌<br>
+		<input type="radio" name="option" value="山巔">山巔<br>
 		<select name="test" class="opts" id="myselect">
-		  <option selected value="DEFAULT">舒宇宸</option>
-		  <option value="SEL1">劉之中</option>
-		  <option value="SEL2">李昱勳</option>
+		  <option selected value="舒宇宸">舒宇宸</option>
+		  <option value="劉之中">劉之中</option>
+		  <option value="李昱勳">李昱勳</option>
 		</select>
 		名言一:<input id="quote_input1" value="數學建模教育之道無它, 唯數學與榜樣"> <br>
 		名言二:<input id="quote_input2" value="Mathematical Modeling is nothing, but Mathematics and Model!"> <br>
@@ -72,7 +72,20 @@ function showopt() {
 	x = x.split(',');
 	x = x.join('<br>');
 	document.getElementById("quote_line1").innerHTML = x;
+	x = document.getElementById("quote_input2").value;
+	x = x.split(',');
+	x = x.join('<br>');
+	document.getElementById("quote_line2").innerHTML = x;
+	x = document.getElementById("quote_input3").value;
+	x = x.split(',');
+	document.getElementById("author1").innerHTML = "<cite>" + x[0] + "(" + document.getElementById("myselect").value +")" +"</cite>";
 	
+	var y = document.getElementsByName("option");
+	for(var i=0; i<y.length; ++i) {
+		if(y[i].checked) {
+			document.getElementById("author2").innerHTML = "<cite>" + x[1] + "(" + y[i].value + ")" + "</cite>";
+		}
+	}
 }
 </script>
 </body>
