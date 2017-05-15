@@ -36,9 +36,11 @@
 </div>
 </section>
 
-<section class="bg-black aligncenter">
+<section class="bg-black aligncenter" id="section_output">
+
 	<span id="teacher" class="background-right-bottom" style="background-image:url('images/ycshu.png'); z-index:5;"></span>
 	<span id="bgimage" class="background light" style="background-image:url('images/road-dawn-mountains-sky.jpeg');"></span>
+	
 	<div class="wrap  fadeInUp">
 		<div class="content-left">
 			<blockquote>
@@ -50,6 +52,10 @@
 				<h3 id="quote_line2">"Mathematical Modeling is nothing<br>but Mathematics and Model!"</h3>
 				<p id="author2"><cite>me</cite></p>				
 			</blockquote>
+			
+				
+			
+			
 		</div>
 	</div>
 </section>
@@ -60,6 +66,7 @@
 <!-- 以下就真的是Javascript的程式了 -->
 <script src="js/webslides.js"></script>
 <script src="js/jquery.min.js"></script>
+<script src="js/html2canvas.js"></script>
 <script>
 	const ws = new WebSlides();
 	//
@@ -67,7 +74,6 @@ function showopt() {
 	
 	var x;
 	
-	document.getElementById("bgimage").style = "background-image:url('images/road-2.jpg');";
 	x = document.getElementById("quote_input1").value;
 	x = x.split(',');
 	x = x.join('<br>');
@@ -78,7 +84,7 @@ function showopt() {
 	document.getElementById("quote_line2").innerHTML = x;
 	x = document.getElementById("quote_input3").value;
 	x = x.split(',');
-	document.getElementById("author1").innerHTML = "<cite>" + x[0] + "(" + document.getElementById("myselect").value +")" +"</cite>";
+	document.getElementById("author1").innerHTML = "<cite>" + x[0] + "</cite>";
 	
 	var teacher_no = document.getElementById("myselect").value;
 	if(teacher_no == 1) {
@@ -92,9 +98,43 @@ function showopt() {
 	var y = document.getElementsByName("option");
 	for(var i=0; i<y.length; ++i) {
 		if(y[i].checked) {
-			document.getElementById("author2").innerHTML = "<cite>" + x[1] + "(" + y[i].value + ")" + "</cite>";
+			document.getElementById("author2").innerHTML = "<cite>" + x[1] + "</cite>";
+			
+			if(i==0) {
+				document.getElementById("bgimage").style = "background-image:url('images/road-dawn-mountains-sky.jpeg');";
+			}
+			if(i==1) {
+				document.getElementById("bgimage").style = "background-image:url('images/road-2.jpg');";
+			} else if(i==2) {
+			
+			} else {
+			
+			}
 		}
 	}
+	x = document.getElementById("canvas_output");
+	/*
+	老師準備要產生圖檔用的 XD
+	html2canvas(document.body, {
+		onrendered: function(canvas) {
+		var myImage = canvas.toDataURL("image/png");
+            window.open(myImage);
+		//y = document.getElementById("section-3");
+		//y.appendChild(canvas);
+		//document.body.appendChild(canvas);
+		}
+	});
+	*/
+	
+}
+function canvasout() {
+	html2canvas(document.body, {
+		onrendered: function(canvas) {
+		var myImage = canvas.toDataURL("image/png");
+            window.open(myImage);
+		
+		}
+	});
 }
 </script>
 </body>
