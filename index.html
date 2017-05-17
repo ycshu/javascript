@@ -16,9 +16,9 @@
 <body>
     <main role="main">
         <article id="webslides" class="vertical">
-<section class="aligncenter">
+<section class="bg-black aligncenter">
 <!-- 下面是選項的語法 -->
-<div class="wrap  fadeInUp">
+<div class="wrap  fadeInUp" id="sec1">
 	<div class="content-left">
 		<input type="radio" name="option" value="跑步" checked>跑步<br>
 		<input type="radio" name="option" value="鐵軌">鐵軌<br>
@@ -34,10 +34,26 @@
 		<button type="button" id="mybutton" onclick=showopt()>產生名言</button>	<!-- 按了之後要執行showopt() -->
 	</div>
 </div>
+<div id="sec2">	
+	<span id="teacher" class="background-right-bottom" style="background-image:url('images/ycshu.png'); z-index:5;"></span>
+	<span id="bgimage" class="background light" style="background-image:url('images/road-dawn-mountains-sky.jpeg');"></span>
+	<div class="wrap  fadeInUp">
+		<div class="content-left">
+			<blockquote>
+				<h3 id="quote_line1">"數學建模教育之道無它<br>唯數學與榜樣"</h3>
+				<p id="author1"><cite>舒大ㄅ土</cite></p>
+			</blockquote>
+			<blockquote>
+				<h3 id="quote_line2">"Mathematical Modeling is nothing<br>but Mathematics and Model!"</h3>
+				<p id="author2"><cite>me</cite></p>				
+			</blockquote>
+		</div>
+	</div>
+</div>
 </section>
-
+<!-- 改成一頁囉 :D
 <section class="bg-black aligncenter" id="section_output">
-
+<div id="sec2">
 	<span id="teacher" class="background-right-bottom" style="background-image:url('images/ycshu.png'); z-index:5;"></span>
 	<span id="bgimage" class="background light" style="background-image:url('images/road-dawn-mountains-sky.jpeg');"></span>
 	
@@ -46,19 +62,16 @@
 			<blockquote>
 				<h3 id="quote_line1">"數學建模教育之道無它<br>唯數學與榜樣"</h3>
 				<p id="author1"><cite>舒大ㄅ土</cite></p>
-				
 			</blockquote>
 			<blockquote>
 				<h3 id="quote_line2">"Mathematical Modeling is nothing<br>but Mathematics and Model!"</h3>
 				<p id="author2"><cite>me</cite></p>				
 			</blockquote>
-			
-				
-			
-			
 		</div>
 	</div>
+</div>
 </section>
+-->
         </article>
         <!-- end article -->
     </main>
@@ -70,10 +83,11 @@
 <script>
 	const ws = new WebSlides();
 	//
+	$( "#sec2" ).hide();
+
 function showopt() {
-	
+
 	var x;
-	
 	x = document.getElementById("quote_input1").value;
 	x = x.split(',');
 	x = x.join('<br>');
@@ -99,22 +113,19 @@ function showopt() {
 	for(var i=0; i<y.length; ++i) {
 		if(y[i].checked) {
 			document.getElementById("author2").innerHTML = "<cite>" + x[1] + "</cite>";
-			
-			if(i==0) {
-				document.getElementById("bgimage").style = "background-image:url('images/road-dawn-mountains-sky.jpeg');";
-			}
 			if(i==1) {
 				document.getElementById("bgimage").style = "background-image:url('images/road-2.jpg');";
 			} else if(i==2) {
-			
+				document.getElementById("bgimage").style = "background-image:url('images/road-3.jpg');";
 			} else {
-			
+				document.getElementById("bgimage").style = "background-image:url('images/road-dawn-mountains-sky.jpeg');";
 			}
 		}
 	}
-	x = document.getElementById("canvas_output");
+	$( "#sec1" ).hide();
+	$( "#sec2" ).show();
 	/*
-	老師準備要產生圖檔用的 XD
+	//老師準備要產生圖檔用的 XD
 	html2canvas(document.body, {
 		onrendered: function(canvas) {
 		var myImage = canvas.toDataURL("image/png");
@@ -126,15 +137,6 @@ function showopt() {
 	});
 	*/
 	
-}
-function canvasout() {
-	html2canvas(document.body, {
-		onrendered: function(canvas) {
-		var myImage = canvas.toDataURL("image/png");
-            window.open(myImage);
-		
-		}
-	});
 }
 </script>
 </body>
