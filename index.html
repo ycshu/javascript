@@ -67,7 +67,7 @@ function showopt() {
 	
 	var x;
 	
-	document.getElementById("bgimage").style = "background-image:url('images/road-2.jpg');";
+	//document.getElementById("bgimage").style = "background-image:url('images/road-2.jpg');";
 	x = document.getElementById("quote_input1").value;
 	x = x.split(',');
 	x = x.join('<br>');
@@ -94,6 +94,15 @@ function showopt() {
 		if(y[i].checked) {
 			document.getElementById("author2").innerHTML = "<cite>" + x[1] + "(" + y[i].value + ")" + "</cite>";
 		}
+	}
+	if(y[0].checked) {
+		document.getElementById("bgimage").style = "background-image:url('images/road-dawn-mountains-sky.jpg');";
+	}
+	if(y[1].checked) {
+		document.getElementById("bgimage").style = "background-image:url('images/road-2.jpeg');";
+	}
+	if(y[2].checked) {
+		document.getElementById("bgimage").style = "background-image:url('images/Lighthouse.jpg');";
 	}
 }
 </script>
