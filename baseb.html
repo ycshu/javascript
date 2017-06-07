@@ -1,0 +1,55 @@
+<!DOCTYPE html>		<!-- 這是註解 -->
+<html>				<!-- 這是html開頭的tag -->
+<head>				<!-- 這是head開頭的tag -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	<!-- 宣告編碼 -->
+<title>網頁小算盤</title>							<!-- 放在視窗列的文字 -->
+</head>				<!-- 這是head結束的tag -->
+<!-- 開始寫程式囉 -->
+<body>
+<h1>這是一個網頁的b進位轉換器</h1>
+輸入一個數字n,
+將它轉換成b進位, 放入x陣列
+把x倒過來印出來<br>
+n:<input id="n"></input><br>
+b:<input id="b"></input><br>
+b進位的n:<h2 id="answer"></h2>
+<button type="button" onclick=mycal()>計算吧</button>
+
+
+<script>
+function mycal(){
+
+var n = Number(document.getElementById("n").value);
+var b = Number(document.getElementById("b").value);
+var x = [];
+var k = 0;
+
+while(n>0) {
+	x.push(n % b); 	//把x[k]放入n除以b的餘數
+	n = (n-x[k])/b; //把n改成(n-x[k])/b
+	k = k + 1;
+}
+// x[0] = 0;
+// x[1] = 2;
+// x[2] = 1;
+// 15 = (120)_3
+// 按照 x[2], x[1], x[0]
+//      x[i] --> x[0], x[1], x[2]
+//      x.length = 3;
+var s = "";
+for(var i=0;i<x.length;i=i+1){
+	console.log(x[x.length-1-i]); 	// 數學的改法
+	s = s + String(x[x.length-1-i]);
+}
+document.getElementById("answer").innerHTML = s;
+/*
+for(var i=x.length-1;i>=0;i=i-1){
+	console.log(x[i]); 				// 程式的改法
+}
+*/
+}
+</script>
+
+
+</body>
+</html>
