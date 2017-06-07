@@ -1,0 +1,241 @@
+<!DOCTYPE html>		<!-- 這是註解 -->
+<html>				<!-- 這是html開頭的tag -->
+<head>				<!-- 這是head開頭的tag -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	<!-- 宣告編碼 -->
+<title>網頁小算盤</title>							<!-- 放在視窗列的文字 -->
+</head>				<!-- 這是head結束的tag -->
+<!-- 開始寫程式囉 -->
+<body>
+<h1>這是一個網頁的小算盤</h1>
+<table border="1">
+<tr>
+<td>
+<canvas id="canvas" width="250" height="250"></canvas>
+</td>
+<td><button type="button" onclick=mygraphics()>Graphics</button></td>
+</tr>
+<tr>
+<td width="250px" align="right"><h2 id="formula"></h2></td>
+<td> <h2 id="debug"></h2></td>
+</tr>
+<tr>
+<td width="250px" align="right">
+<h2 id="output">0</h2>
+</td>
+</tr>
+<tr>
+<td><input id="user_input"></td>
+</tr>
+</table>
+<table border="1">      <!-- begin a table -->
+<tr>					<!-- begin a row in table -->
+<td>
+<button type="button" onclick=mycal("1")>1</button>					<!-- table data -->
+</td>
+<td>
+<button type="button" onclick=mycal("2")>2</button>
+</td>
+<td>
+<button type="button" onclick=mycal("3")>3</button>
+</td>
+<td>
+<button type="button" onclick=mycal("+")>+</button>
+</td>
+</tr>
+
+<tr>
+<td><button type="button" onclick=mycal("4")>4</button></td>
+<td><button type="button" onclick=mycal("5")>5</button></td>
+<td><button type="button" onclick=mycal("6")>6</button></td>
+<td><button type="button" onclick=mycal("-")>-</button></td>
+</tr>
+<tr>
+<td><button type="button" onclick=mycal("7")>7</button></td>
+<td><button type="button" onclick=mycal("8")>8</button></td>
+<td><button type="button" onclick=mycal("9")>9</button></td>
+<td><button type="button" onclick=mycal("*")>*</button></td>
+</tr>
+<tr>
+<td><button type="button" onclick=mycal("0")>0</button></td>
+<td><button type="button" onclick=mycal("=")>=</button></td>
+<td><button type="button" onclick=mycal("C")>C</button></td>
+<td><button type="button" onclick=mycal("B")>Backspace</button></td>
+</tr>
+
+</table>
+
+<script>
+var cal_value, cal_op, cal_sign, a=[];
+cal_value = 0;
+cal_add1  = 0;
+cal_sign  = 1;
+cal_op    = "+";
+
+// array a
+/*
+var x = [], f = [], s = 0, n=10;
+for(var k=0;k<n;++k){
+	x.push((k+1)*(k+1));
+}
+for(var m=0;m<n;++m){
+	s = 0;
+	for(var k=0;k<n;++k){
+		s = s + x[k] * Math.cos(Math.PI/n*m*(k+1/2));
+	}
+	f.push(s);
+}
+console.log(f);
+*/
+//var v = n*(n+1)*(2*n+1)/6;
+//console.log(s);
+//console.log(v);
+
+
+
+
+function mycal(x) {
+
+	var y = document.getElementById("formula");
+
+	if(x != "=") {
+		y.innerHTML += x;
+	}
+
+	var y = document.getElementById("output");
+	
+	if(x == "B") {
+		var s = y.innerHTML;
+		if(s.length > 1) {
+			y.innerHTML = s.substr(0,s.length-1); // 在長度是1的時候不能用
+		} else {
+			y.innerHTML = "0";
+		}
+	} else if (x == 'C') {
+		y.innerHTML = "0";
+	} else if (x == '+') {
+		if(cal_op == '+') {
+			//cal_add1 += cal_sign * cal_value;
+			a.push(cal_sign*cal_value);
+		} else if (cal_op == '*') {
+			//cal_add1 *= cal_value;
+			a.push(cal_add1*cal_value);
+			cal_add1 = 0;
+		}
+		cal_sign = 1;
+		y.innerHTML = "0";
+		cal_op = '+';
+		console.log(a);
+	} else if (x == '-') {
+		if(cal_op == '+') {
+			cal_add1 += cal_sign * cal_value;
+		} else if (cal_op == '*') {
+			cal_add1 *= cal_value;
+		}
+		cal_sign = -1;
+		y.innerHTML = "0";	
+		cal_op = '+';
+	} else if (x == '*') {
+		if(cal_add1 == 0) {
+			cal_add1 = cal_value;
+		} else if( cal_op == "+") {
+			//cal_add1 += cal_sign * cal_value;
+		} else {
+			cal_add1 *= cal_value;
+		}
+		y.innerHTML = "0";	
+		cal_op = '*';
+	} else if (x == '=') {
+		if(cal_op == '+') {
+			cal_add1 += cal_sign * cal_value;
+		} else if (cal_op == '*') {
+			cal_add1 *= cal_value;
+		}
+		var s = cal_sign * cal_value;
+		if(cal_op == '*') {
+			s = cal_add1;
+		}
+		for(var i=0;i<a.length;++i){
+			s = s + a[i];
+		}
+		//y.innerHTML = cal_add1;
+		var x = document.getElementById("user_input");
+		with(Math) {
+			y.innerHTML = eval(x.value);
+		}
+	} else {
+		if(y.innerHTML == "0") {
+			y.innerHTML = x;
+		} else {
+			y.innerHTML += x;
+		}
+	}
+	cal_value = Number(y.innerHTML);
+
+	y = document.getElementById("debug");
+	y.innerHTML = cal_add1;
+}
+function mygraphics(){
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
+
+	ctx.fillStyle = "rgb(200,200,0)";
+    ctx.fillRect (10, 10, 55, 50);
+	ctx.strokeRect(100, 100, 20, 10);
+	
+	ctx.fillStyle = "rgb(255,0,0)";
+	ctx.beginPath();
+    ctx.moveTo(75,50);
+    ctx.lineTo(100,75);
+    ctx.lineTo(100,25);
+    ctx.fill();
+	
+	ctx.beginPath();
+    ctx.arc(175,75,50,0,Math.PI*2,true); // Outer circle
+    ctx.moveTo(140,75);
+    ctx.arc(175,75,35,0,Math.PI,false);   // Mouth (clockwise)
+    ctx.moveTo(165,65);
+    ctx.arc(160,65,5,0,Math.PI*2,true);  // Left eye
+    ctx.moveTo(195,65);
+    ctx.arc(190,65,5,0,Math.PI*2,true);  // Right eye
+	ctx.strokeStyle = "rgb(0, 0, 0)"
+    ctx.stroke();
+	ctx.closePath();
+	
+    ctx.fillStyle = "rgba(0, 0, 200, 0.1)";
+    ctx.fillRect (30, 30, 55, 50);
+	
+	/*
+	ctx.beginPath();
+	ctx.strokeStyle = "rgb(0, 0, 0)"
+	ctx.moveTo(0,125);
+	for(var i=0;i<250;++i) {
+		ctx.lineTo(i,125-Math.sin(i/10)*10);
+		
+	}
+	ctx.stroke();
+	ctx.closePath();
+	*/
+	
+	ctx.beginPath();	
+	ctx.strokeStyle = "rgb(255, 0, 0)"
+	ctx.moveTo(0,125);
+	var z = document.getElementById("user_input").value;
+	with(Math) {
+		var f = eval("(function (x) { return " + z + "; })");
+	
+		for(var i=0;i<250;++i) {
+			ctx.lineTo(i,125-f(i));
+		
+		}
+	}
+	ctx.stroke();
+	ctx.closePath();
+}
+
+
+
+
+
+</script>
+</body>
+</html>

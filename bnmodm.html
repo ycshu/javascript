@@ -1,0 +1,43 @@
+<!DOCTYPE html>		<!-- 這是註解 -->
+<html>				<!-- 這是html開頭的tag -->
+<head>				<!-- 這是head開頭的tag -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />	<!-- 宣告編碼 -->
+<title>網頁小算盤</title>							<!-- 放在視窗列的文字 -->
+</head>				<!-- 這是head結束的tag -->
+<!-- 開始寫程式囉 -->
+<body>
+<h1>這是一個網頁的PowerMod</h1>
+輸入一個數字n,b,還有, 印出b的n次方除以m的餘數<br>
+b:<input id="b"></input><br>
+n:<input id="n"></input><br>
+m:<input id="m"></input><br>
+b的n次方除以m的餘數:<h2 id="answer"></h2>
+<button type="button" onclick=mycal()>計算吧</button>
+
+
+<script>
+
+function mycal(){
+//b^n mod m = ?
+var n = Number(document.getElementById("n").value);
+var b = Number(document.getElementById("b").value);
+var m = Number(document.getElementById("m").value);
+
+var s = 1;
+while(n>0) {
+	if(n % 2 == 1) {	// 如果n是奇數, 
+		s = (s*b) % m;	//     s變成s乘上b (mod m)
+	}
+	b = b*b;			// 把b變成b的平方  (mod m)
+	n = Math.floor(n/2);// 把n變成一半的整數
+	//s = (s*b) % m;
+	//n = n - 1;
+}
+//console.log(s);
+document.getElementById("answer").innerHTML = s;
+}
+</script>
+
+
+</body>
+</html>
